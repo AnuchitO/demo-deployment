@@ -1,11 +1,12 @@
 import React from 'react'
 import {useEffect, useState} from 'react'
+const {REACT_APP_BACKEND_URL} = process.env
 
 export default function BackendStatus() {
   const [status, setStatus] = useState([])
   const [err, setError] = useState(null)
 
-  const url = `${process.env.REACT_APP_BACKEND_URL}/api/v1/health`
+  const url = `${REACT_APP_BACKEND_URL}/api/v1/health`
 
   useEffect(() => {
     fetch(url)
