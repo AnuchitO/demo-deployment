@@ -8,9 +8,15 @@ import (
 	"time"
 )
 
+func text() string {
+	hostname, _ := os.Hostname()
+	return fmt.Sprintf("Hostname: %s\nTime: %s\n", hostname, time.Now().Format(time.RFC3339))
+}
+
 func main() {
+
 	http.HandleFunc("GET /api/v1/health", func(w http.ResponseWriter, r *http.Request) {
-		// response hostname and time
+		w.Header().Set("Access-Control-Allow-Origin", "*")
 		hostname, _ := os.Hostname()
 		fmt.Fprintf(w, "Hostname: %s\nTime: %s\n", hostname, time.Now().Format(time.RFC3339))
 	})
