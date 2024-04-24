@@ -30,18 +30,19 @@ resource "google_compute_instance" "instance" {
 
   metadata = {
     gce-container-declaration = <<EOF
-  spec:
-    containers:
-    - name: instance
-      image: asia-southeast1-docker.pkg.dev/onyx-logic-420708/demo-docker-registry-id/backend:46e8b27
-      args: []
-			ports:
-      - containerPort: 8080
-      securityContext:
+    spec:
+      containers:
+      - name: instance
+        image: asia-southeast1-docker.pkg.dev/onyx-logic-420708/demo-docker-registry-id/backend:46e8b27
+        args: []
+        ports:
+        - containerPort: 8080
+          hostPort: 8080
+        securityContext:
         privileged: true  # Set to false for improved security
-      stdin: true
-      tty: true
-    restartPolicy: Always
+        stdin: true
+        tty: true
+      restartPolicy: Always
 EOF
   }
 
