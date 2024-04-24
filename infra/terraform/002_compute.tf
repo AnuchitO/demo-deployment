@@ -3,6 +3,14 @@ variable "backend_image" {
   default = "asia-southeast1-docker.pkg.dev/onyx-logic-420708/demo-docker-registry-id/backend:46e8b27"
 }
 
+resource "google_compute_address" "backend_static_ip" {
+  name = "backend-static-ip"
+}
+
+output "backend_static_ip" {
+  value = google_compute_address.backend_static_ip.address
+}
+
 resource "google_compute_instance" "backend" {
   boot_disk {
     auto_delete = true
@@ -51,6 +59,7 @@ EOF
   network_interface {
     access_config {
       network_tier = "PREMIUM"
+      nat_ip       = google_compute_address.backend_static_ip.address
     }
 
     queue_count = 0
