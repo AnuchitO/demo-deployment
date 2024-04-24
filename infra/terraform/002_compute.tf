@@ -1,12 +1,12 @@
-variable "container_image" {
+variable "backend_image" {
   type    = string
   default = "asia-southeast1-docker.pkg.dev/onyx-logic-420708/demo-docker-registry-id/backend:46e8b27"
 }
 
-resource "google_compute_instance" "instance" {
+resource "google_compute_instance" "backend" {
   boot_disk {
     auto_delete = true
-    device_name = "instance"
+    device_name = "backend"
 
     initialize_params {
       image = "projects/cos-cloud/global/images/cos-stable-109-17800-147-60"
@@ -32,8 +32,8 @@ resource "google_compute_instance" "instance" {
     gce-container-declaration = <<EOF
     spec:
       containers:
-      - name: instance
-        image: ${var.container_image}
+      - name: backend
+        image: ${var.backend_image}
         args: []
         ports:
         - containerPort: 8080
@@ -46,7 +46,7 @@ resource "google_compute_instance" "instance" {
 EOF
   }
 
-  name = "instance"
+  name = "backend"
 
   network_interface {
     access_config {
