@@ -33,7 +33,7 @@ resource "google_compute_instance" "instance" {
     spec:
       containers:
       - name: instance
-        image: asia-southeast1-docker.pkg.dev/onyx-logic-420708/demo-docker-registry-id/backend:46e8b27
+        image: ${var.container_image}
         args: []
         ports:
         - containerPort: 8080
