@@ -39,7 +39,7 @@ resource "google_compute_instance" "instance" {
         - containerPort: 8080
           hostPort: 8080
         securityContext:
-        privileged: true  # Set to false for improved security
+        privileged: false  # Set to false for improved security
         stdin: true
         tty: true
       restartPolicy: Always
