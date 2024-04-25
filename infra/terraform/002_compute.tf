@@ -43,9 +43,13 @@ resource "google_compute_instance" "backend" {
       - name: backend
         image: ${var.backend_image}
         args: []
+        env:
+        - name: PORT
+          value: "80"
         ports:
         - containerPort: 8080
-          hostPort: 8080
+          hostPort: 80
+          targetPort: 80
         securityContext:
         privileged: false  # Set to false for improved security
         stdin: true
