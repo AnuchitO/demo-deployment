@@ -21,7 +21,7 @@ FROM alpine:3.19.1 AS final
 WORKDIR /app
 
 # Copy only the application binary
-COPY --from=builder demoapi .
+COPY --from=builder /app/demoapi .
 
 # Expose port (replace 8080 with your actual port if needed)
 EXPOSE 8080
