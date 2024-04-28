@@ -119,16 +119,17 @@ resource "google_compute_instance" "frontend" {
     mode = "READ_WRITE"
   }
 
-  can_ip_forward      = false
-  deletion_protection = false
-  enable_display      = false
+  can_ip_forward            = false
+  deletion_protection       = false
+  enable_display            = false
+  allow_stopping_for_update = true
 
   labels = {
     container-vm = format("cos-stable-%s", "frontend")
     goog-ec-src  = "vm_add-tf"
   }
 
-  machine_type = "e2-medium"
+  machine_type = "e2-small"
 
   metadata = {
     gce-container-declaration = <<EOF
